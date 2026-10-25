@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CPPlus / EzyKam v1</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/vendor/mqtt.min.js" defer></script>
+  <script src="/vendor/mp4box.all.min.js" defer></script>
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+<header><a href="/">My Cameras / v1</a><span id="account-status">Checking session</span><button id="signout" hidden>Sign out</button></header>
+<main>
+  <section id="login" hidden>
+    <h1>Scan with EzyKam+</h1>
+    <p>Open the scanner in your phone app and confirm access.</p>
+    <div id="qrWrap"><img id="qr" alt="EzyKam+ account connection QR code" hidden><span id="qr-placeholder">Preparing code...</span></div>
+    <p id="qr-status" role="status" aria-live="polite"></p>
+    <button id="refresh-qr">New QR code</button>
+  </section>
+  <section id="workspace" hidden>
+    <div class="row"><h1>My cameras</h1><span id="camera-count">0</span><button id="refresh-cams">Reload cameras</button></div>
+    <p id="camera-summary"></p>
+    <div id="cameras"></div>
+    <p id="empty-cameras" hidden>No cameras found. Check sharing in EzyKam+ and refresh.</p>
+    <div class="row"><h2 id="camera-name">Select a camera</h2><span id="stream-status">Standby</span></div>
+    <div id="stage"><video id="video" autoplay playsinline controls muted aria-label="Live camera video"></video><div id="stage-overlay"><h3 id="stage-title">Choose a camera</h3><p id="stage-detail">Select an online camera above.</p></div></div>
+    <div class="row"><span id="stream-detail">No stream active</span><button id="fullscreen" disabled>Fullscreen</button><button id="retry" hidden>Retry</button><button id="stop" disabled>Stop</button></div>
+    <select id="quality" aria-label="Stream quality" hidden><option value="sd" selected>SD / H264</option></select>
+    <p>SD/H264 playback. Stop other EzyKam+ viewers before connecting. Use v2 for HD.</p>
+    <details><summary>Connection details</summary><p>Credentials and SDP are omitted.</p><button id="copy-log">Copy log</button><pre id="log">No connection events yet.</pre></details>
+  </section>
+  <div id="notice" role="status" aria-live="polite" hidden></div>
+</main>
+<footer><span>CPPlus / EzyKam v1</span><span id="clock"></span></footer>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "cpplus-ezykam-v1",
+  "version": "1.1.0",
+  "private": true,
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test test/*.test.mjs"
+  }
+}

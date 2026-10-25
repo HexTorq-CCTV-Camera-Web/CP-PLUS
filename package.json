@@ -1,0 +1,11 @@
+{
+  "name": "cpplus-ezykam-archive",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start:v1": "npm --prefix v1 start",
+    "start:v2": "npm --prefix v2 start",
+    "test": "node --test v1/test/*.test.mjs v2/test/*.test.mjs",
+    "verify:standalone": "node tools/verify-standalone.mjs"
+  }
+}

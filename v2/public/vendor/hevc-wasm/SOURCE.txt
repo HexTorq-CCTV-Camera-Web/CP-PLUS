@@ -1,0 +1,3 @@
+Source: https://github.com/OpenIPC/hevc-wasm/tree/d43ba2504a4a9e18e6658bcd15ad62a84188153f
+Artifacts: dist/de265.js, dist/de265.wasm, dist/paint.js
+Wrapper MIT; libde265 LGPL-3.0. See COPYING.libde265 and upstream README.md for build and relinking instructions.

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1018">
+  <title>Camera / Live view</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/vendor/mqtt.min.js" defer></script>
+  <script src="/vendor/mp4box.all.min.js" defer></script>
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Camera home"><span class="brand-mark">◉</span> camera<span class="version">v2</span></a>
+    <div class="top-right"><span class="connection" id="account-status">Checking session</span><button id="signout" class="quiet" hidden>Sign out</button></div>
+  </header>
+  <main>
+    <section id="login" class="login-layout" hidden>
+      <div class="login-copy"><p class="eyebrow">YOUR SPACE. IN VIEW.</p><h1>A little closer.<br>From anywhere.</h1><p>Your EzyKam+ cameras, in one simple live view.<br>Connect your account to get started.</p><div class="login-notes"><span>01 <b>Open EzyKam+ on your phone</b></span><span>02 <b>Scan the code and confirm access</b></span><span>03 <b>Choose a camera to watch</b></span></div></div>
+      <div class="login-card"><div class="card-label"><span class="dot"></span> CONNECT YOUR ACCOUNT</div><h2>Scan. Connect. View.</h2><p>Use the scanner in your EzyKam+ app.</p><div class="qr-frame"><img id="qr" alt="EzyKam+ account connection QR code" hidden><span id="qr-placeholder">Preparing your code…</span></div><p id="qr-status" role="status" aria-live="polite">Getting a fresh QR code</p><button id="refresh-qr" class="primary">Generate new code <span>↻</span></button><small>Connection lasts until your session expires.<br>Your app password stays in EzyKam+.</small></div>
+    </section>
+    <section id="workspace" hidden>
+      <div class="page-heading"><div><p class="eyebrow">YOUR CAMERAS</p><h1>Live view<span class="heading-dot">.</span></h1><p id="camera-summary">Connect to see your cameras.</p></div><button id="refresh-cams" class="secondary">↻ <span>Refresh cameras</span></button></div>
+      <div class="workspace-grid">
+        <aside class="devices"><div class="section-label">DEVICES <span id="camera-count">0</span></div><div id="cameras"></div><p id="empty-cameras" class="empty-note" hidden>No cameras were returned for this account. Check camera sharing in EzyKam+ and refresh.</p><div class="sidebar-footer"><span class="dot"></span> EzyKam+ account connected</div></aside>
+        <div class="viewer-panel">
+          <div class="viewer-heading"><div><span class="eyebrow">LIVE MONITOR</span><h2 id="camera-name">Select a camera</h2></div><span id="stream-status" class="pill">Standby</span></div>
+          <div class="stage" id="stage"><video id="video" autoplay playsinline muted controls aria-label="Live camera video"></video><div id="stage-overlay" class="stage-overlay"><div class="camera-symbol" aria-hidden="true">▣</div><h3 id="stage-title">Your next view is one click away.</h3><p id="stage-detail">Choose a camera from the device list to start watching.</p></div><span class="stage-corner">CAMERA / LIVE</span></div>
+          <div class="viewer-toolbar"><span id="stream-detail">No stream active</span><div><label class="quality-label" for="quality">Quality</label><select id="quality" aria-label="Stream quality"><option value="hd">HD · Main stream</option><option value="sd">SD · Compatible</option></select><button class="quiet" id="fullscreen" disabled>⛶ Fullscreen</button><button class="secondary" id="retry" hidden>↻ Retry</button><button class="stop" id="stop" disabled>■ Stop</button></div></div>
+          <div class="viewer-note"><span>ⓘ</span><p>For a clean connection, stop playback in other EzyKam+ tabs or apps before starting here.</p></div>
+          <details class="diagnostics"><summary>Connection details <span>DIAGNOSTICS</span></summary><div class="diagnostic-top"><p>Connection events. Credentials and SDP are omitted.</p><button id="copy-log" class="quiet">Copy log</button></div><pre id="log" aria-label="Connection events">No connection events yet.</pre></details>
+        </div>
+      </div>
+    </section>
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+  </main>
+  <footer><span>CAMERA / V2</span><span>A clear view of what matters.</span><span id="clock"></span></footer>
+</body>
+</html>
